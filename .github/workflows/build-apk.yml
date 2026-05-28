@@ -1,25 +1,3 @@
-    - name: Install system dependencies
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y \
-          build-essential \
-          libssl-dev \
-          libffi-dev \
-          python3-dev \
-          python3-pip \
-          openjdk-11-jdk \
-          openjdk-11-jre \
-          git \
-          wget \
-          zip \
-          unzip \
-          libtool \
-          autoconf \
-          automake \
-          pkg-config \
-          m4
-完整优化版（只需替换原文件对应部分即可）：
-
 YAML
 name: Build APK
 
@@ -66,8 +44,8 @@ jobs:
     
     - name: Set JAVA_HOME
       run: |
-         echo "JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64" >> $GITHUB_ENV
-         echo "PATH=/usr/lib/jvm/java-11-openjdk-amd64/bin:$PATH" >> $GITHUB_ENV
+        echo "JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64" >> $GITHUB_ENV
+        echo "PATH=/usr/lib/jvm/java-11-openjdk-amd64/bin:$PATH" >> $GITHUB_ENV
     
     - name: Install Python dependencies
       run: |
