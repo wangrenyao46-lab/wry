@@ -35,6 +35,11 @@ jobs:
           wget \
           zip \
           unzip
+          libtool \
+          autoconf \
+          automake \
+          pkg-config \
+          m4
     
     - name: Set JAVA_HOME
       run: |
