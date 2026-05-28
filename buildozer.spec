@@ -95,9 +95,6 @@ android.enable_androidx = True
 # (bool) Copy library instead of making a libpymodules.so
 # android.copy_libs = 1
 
-# (str) The Android arch to build for, choices: armeabi-v7a, arm64-v8a, x86, x86_64
-android.archs = arm64-v8a
-
 # (int) overrides automatic versionCode generation in buildozer.spec
 # android.version_code = 1
 
@@ -179,6 +176,7 @@ warn_on_root = 1
 #
 # List as sections
 #
+
 # You can define p4a.local_recipes to override them with completely custom
 # versions of the recipes. p4a.local_recipes should point to a directory
 # containing your recipes as subdirectories. Any recipe overrides here will
