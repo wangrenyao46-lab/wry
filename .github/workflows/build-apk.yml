@@ -1,4 +1,3 @@
-
 name: Build APK
 
 on:
@@ -37,10 +36,13 @@ jobs:
           zip \
           unzip \
           libtool \
+          libtool-bin \
           autoconf \
           automake \
+          autotools-dev \
           pkg-config \
-          m4
+          m4 \
+          libltdl-dev
     
     - name: Set JAVA_HOME
       run: |
