@@ -38,8 +38,8 @@ jobs:
     
     - name: Set JAVA_HOME
       run: |
-        echo "JAVA_HOME=$(readlink -f /usr/bin/java | sed 's:/jre/bin/java::')" >> $GITHUB_ENV
-        echo "PATH=$JAVA_HOME/bin:$PATH" >> $GITHUB_ENV
+         echo "JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64" >> $GITHUB_ENV
+         echo "PATH=/usr/lib/jvm/java-11-openjdk-amd64/bin:$PATH" >> $GITHUB_ENV
     
     - name: Install Python dependencies
       run: |
