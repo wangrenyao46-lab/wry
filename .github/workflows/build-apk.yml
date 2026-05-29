@@ -42,7 +42,9 @@ jobs:
           autotools-dev \
           pkg-config \
           m4 \
-          libltdl-dev
+          libltdl-dev \
+          libgeos-dev \
+          libgeos-c1v5
     
     - name: Set JAVA_HOME
       run: |
@@ -52,7 +54,7 @@ jobs:
     - name: Install Python dependencies
       run: |
         python -m pip install --upgrade pip setuptools wheel
-        pip install buildozer cython==0.29.36
+        pip install cython==0.29.36 buildozer kivy[base]==2.2.0
     
     - name: Build APK with Buildozer
       run: |
