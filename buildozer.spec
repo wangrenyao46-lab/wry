@@ -10,7 +10,7 @@ orientation = portrait
 android.permissions = WRITE_EXTERNAL_STORAGE,READ_EXTERNAL_STORAGE,INTERNET
 android.api = 33
 android.minapi = 21
-# 不再需要 android.ndk = ...，因为我们将通过环境变量 ANDROIDNDK 传递路径
+# 不在这里指定 NDK 版本，通过环境变量 ANDROIDNDK 传递
 android.sdk_version = 33
 android.accept_sdk_license = True
 android.archs = arm64-v8a
