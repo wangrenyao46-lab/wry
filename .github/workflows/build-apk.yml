@@ -31,17 +31,17 @@ jobs:
           libtool libtool-bin autoconf automake \
           pkg-config m4 libltdl-dev
 
-    - name: Set up NDK
-      uses: nttld/setup-ndk@v1
-      with:
-        ndk-version: r23b
-        add-to-path: false
-        local-cache: true
-
-    - name: Set NDK environment variable
+    - name: Download and extract NDK r23b
       run: |
-        echo "ANDROID_NDK_HOME=$ANDROID_HOME/ndk-bundle" >> $GITHUB_ENV
-        echo "NDK_PATH=$ANDROID_HOME/ndk-bundle" >> $GITHUB_ENV
+        NDK_VERSION="r23b"
+        NDK_ZIP="android-ndk-${NDK_VERSION}-linux.zip"
+        # 使用清华镜像
+        wget -q https://mirrors.tuna.tsinghua.edu.cn/android/repository/${NDK_ZIP}
+        mkdir -p $HOME/android-ndk
+        unzip -q ${NDK_ZIP} -d $HOME/android-ndk/
+        # 移动并重命名目录
+        mv $HOME/android-ndk/android-ndk-${NDK_VERSION} $HOME/ndk
+        echo "NDK_PATH=$HOME/ndk" >> $GITHUB_ENV
 
     - name: Install Python dependencies
       run: |
@@ -52,13 +52,16 @@ jobs:
       run: buildozer android debug
       env:
         ANDROID_ACCEPT_SDK_LICENSE: "1"
-        ANDROIDNDK: ${{ env.ANDROID_NDK_HOME }}
+        ANDROIDNDK: ${{ env.NDK_PATH }}
+        # 覆盖 GitHub 自带的 NDK 路径
+        ANDROID_NDK_HOME: ${{ env.NDK_PATH }}
+        ANDROID_NDK_ROOT: ${{ env.NDK_PATH }}
 
     - name: Upload APK artifact
       if: success()
       uses: actions/upload-artifact@v4
       with:
-        name: myapp-debug
+        name: shop-points-app
         path: bin/*.apk
         retention-days: 30
 
