@@ -31,20 +31,17 @@ jobs:
           libtool libtool-bin autoconf automake \
           pkg-config m4 libltdl-dev
 
-    - name: Download NDK manually (Tsinghua mirror)
-      run: |
-        NDK_VERSION="r23b"
-        NDK_ZIP="android-ndk-${NDK_VERSION}-linux.zip"
-        wget -q https://mirrors.tuna.tsinghua.edu.cn/android/repository/${NDK_ZIP}
-        mkdir -p ~/.buildozer/android/platform
-        unzip -q ${NDK_ZIP} -d ~/.buildozer/android/platform/
-        echo "NDK_PATH=$HOME/.buildozer/android/platform/android-ndk-${NDK_VERSION}" >> $GITHUB_ENV
-
-    - name: Cache NDK
-      uses: actions/cache@v3
+    - name: Set up NDK
+      uses: nttld/setup-ndk@v1
       with:
-        path: ~/.buildozer/android/platform/android-ndk-r23b
-        key: ndk-23b
+        ndk-version: r23b
+        add-to-path: false
+        local-cache: true
+
+    - name: Set NDK environment variable
+      run: |
+        echo "ANDROID_NDK_HOME=$ANDROID_HOME/ndk-bundle" >> $GITHUB_ENV
+        echo "NDK_PATH=$ANDROID_HOME/ndk-bundle" >> $GITHUB_ENV
 
     - name: Install Python dependencies
       run: |
@@ -55,7 +52,7 @@ jobs:
       run: buildozer android debug
       env:
         ANDROID_ACCEPT_SDK_LICENSE: "1"
-        ANDROIDNDK: ${{ env.NDK_PATH }}
+        ANDROIDNDK: ${{ env.ANDROID_NDK_HOME }}
 
     - name: Upload APK artifact
       if: success()
