@@ -54,7 +54,7 @@ jobs:
     - name: Install Python dependencies
       run: |
         python -m pip install --upgrade pip setuptools wheel
-        pip install cython==0.29.36 buildozer kivy[base]==2.2.0
+        pip install cython==3.0.8 buildozer kivy==2.2.0 pyjnius
     
     - name: Build APK with Buildozer
       run: |
